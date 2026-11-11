@@ -1,3 +1,8 @@
+# Optimized by ci-cost (https://github.com/mariotavarez/ci-cost)
+# Applied 1 optimization:
+# - [MEDIUM] Add concurrency group to "ios.yml"
+# Estimated savings: ~2 min/run
+#
 name: iOS 
 
 on:
@@ -30,6 +35,10 @@ on:
       - 'mise*.toml'
       - '.github/workflows/ios.yml'
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   ios_test:
     name: Execute tests on iOS
